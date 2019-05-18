@@ -1,0 +1,116 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+            body {
+                font-family: 'Roboto', sans-serif;
+            }
+            .bg{
+                color: black;
+                background: white;
+                
+            }
+            .rounded-div{
+                box-sizing: border-box;
+                padding: 5px;
+                border-radius: 5px 5px 5px 0px;
+                background: #2980ba;
+                color: white;
+                margin: 0px;
+                display: inline-block;
+            }
+            
+            
+            .pairv{
+                box-sizing: border-box;
+                width: 49%;
+                display: inline-block;
+            }
+            
+            .pairv .description{
+                background: gray;
+                display: inline-block;
+                box-sizing: border-box;
+                padding: 5px;
+                border-radius: 0px 5px 5px 5px;
+                color: white;
+            }
+            
+            .profile{
+                font-weight: bold;
+                display: inline-block;
+                text-align: center;
+                padding: 5px;
+                background: #edeeef;
+                margin: 10px 0px;
+                font-size: 24px;
+                border-radius: 5px;
+            }
+            
+            .profile .description{
+                width:calc(100%-4px);
+                background: gray;
+                color: white;
+                padding: 2px;
+                margin-top: 2px;
+                border-radius: 2px;
+                font-size: 60%;
+            }
+            .date{
+                font-size: 0.8rem;
+                background: #2980ba;
+                color: white;
+                display: inline-block;
+                box-sizing: border-box;
+                margin: 5px 0px;
+                padding: 10px 5px 10px 5px;
+                border-radius: 5px;
+            }
+            
+            .date span{
+                background: #edeeef;
+                padding: 5px;
+                box-sizing: border-box;
+                color:black;
+                font-weight: 600;
+                border-radius: 5px;
+            }
+            
+            p{
+                margin: 5px;
+            }
+            
+            p span{
+                font-weight: bold;
+            }
+
+.package{
+    background: #edeeef;
+    box-sizing: border-box;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.package p{
+    margin-left: 5px;
+}
+
+table{
+    border-collapse: collapse;
+}
+td, th{
+    border: 1px solid #ddd;
+  padding: 8px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2;}
+
+ th {
+    border-color: #2980ba;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #2980ba;
+  color: white;
+}
+
+.errors{
+    margin-top:15px;
+}
