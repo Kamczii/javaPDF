@@ -1,112 +1,135 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
-    <head>
-        <meta charset="UTF-8">
-        <link rel="stylesheet" type="text/css" media="all" href="style.css"/>
+<head lang="pl">
+        <link href="style.css" rel="stylesheet" />
+         <link href='/fonts/Roboto-Black.ttf'
+        rel='stylesheet' type='text/css' />
+         <link href="https://fonts.googleapis.com/css?family=Roboto:400,500&display=swap&subset=latin-ext" rel="stylesheet">
+        <meta charset="UTF-8"/>
     </head>
     <body>
-        <div class="bg">
-        
-        <div>
-            <div class="profile">
-                Kamil Testowy
-                <div class="description">
-                    Przekazujący
-                </div>
-            </div>
-        </div>
-        
-            
-        <div class="pairv">
-            <h2 class="rounded-div">Państwowe archiwum</h2>
-            <div class="description">ul. Przykładowa 31 Warszawa</div>
-        </div>
-        
-        <div class="pairv">
-            <h2 class="rounded-div">Jednostka przekazująca</h2>
-            <div class="description">ul. Przykładowa 36 Gdańsk</div>
-        </div>
-        
-        <div style="clear: both"></div>
-            
-        
-            
-        
-        <div>
-            <div class="date">
-                <span>Data sporządzenia wniosku</span> 05-24-2019
-            </div>
-        </div>
-        <div>
-            <div class="date">
-            <span>Data sporządzenia spisu z-o</span> 05-24-2019
-        </div>
-        </div>
-        
-        
-            
-        <p><span>Ilość materiałów: </span>2MB</p>
-        <p><span>Znak sprawy: </span> 002143/412312</p>
-        
-        <div class="date">
-            <span>Data przeprowadzenia weryfikacji i sporządzenia raportu</span> 05-24-2019
-        </div>
-        
-        <div class="package">
-            Paczka
-            <p><b>Identyfikator paczki: </b>32</p>
-            <p><b>Nazwa pliku: </b> paczka.pdf</p>
-            
-            <table cellspacing="0" cellpadding="0">
-                <tr>
-                    <th>Kroki weryfikacji</th>
-                    <th>Informacja</th>
-                </tr>
-                <tr>
-                    <td>Pieczęć elektroniczna</td>
-                    <td>Sukces</td>
-                </tr>
-                <tr>
-                    <td>Suma kontrolna</td>
-                    <td>Sukces</td>
-                </tr>
-                <tr>
-                    <td>JRWA</td>
-                    <td>Sukces</td>
-                </tr>
-                <tr>
-                    <td>Spis zdawczo – odbiorczy</td>
-                    <td>Sukces</td>
-                </tr>
-                <tr>
-                    <td>Schemat metadanych i struktura paczki</td>
-                    <td>Sukces</td>
-                </tr>
-            </table>
-            
-            <div class="errors">
-                <b>Uzasadnienie odrzucenia paczki:</b><br>
-                Paczka była zbyt ciężka. Paczka była zbyt ciężka Paczka była zbyt ciężka Paczka była zbyt ciężka Paczka była zbyt ciężka
-                <br>
-                <b>Błędy: </b>
-                <table>
+       <div class="bg">
+           <h2>Raport z weryfikacji wniosku w systemie Archiwum Dokumentów Elektronicznych</h2>
+           
+           <div class="details">
+                <div class="block">
+                  <h3>Dane adresata</h3>
+                   <table>
+                       <tr>
+                           <td>Archiwum państwowe: </td>
+                           <td>[[${data.getStateArchive().getName()}]] </td>
+                       </tr>
+                       <tr>
+                           <td>Ulica: </td>
+                           <td>[[${data.getStateArchive().getAddress().getStreet()}]] </td>
+                       </tr>
+                       <tr>
+                           <td>Number: </td>
+                           <td>[[${data.getStateArchive().getAddress().getApartmentNumber()}]] / [[${data.getStateArchive().getAddress().getBuildingNumber()}]]</td>
+                       </tr>
+                       <tr>
+                           <td>Miasto: </td>
+                           <td>[[${data.getStateArchive().getAddress().getCity()}]]</td>
+                       </tr>
+                       <tr>
+                           <td>Kod pocztowy: </td>
+                           <td>[[${data.getStateArchive().getAddress().getZipCode()}]]</td>
+                       </tr>
+                   </table>
+               </div>
+
+               <div class="block">
+                  <h3>Dane wnioskodawcy</h3>
+                   <table>
                     <tr>
-                        <th>
-                            Paczka w pewnym miejscu przybiera na rozmiarze. Możliwe że to jakaś pętla.
-                        </th>
-                    </tr>
-                    <tr>
-                        <td>
-                            data.setLastname("Does");
-                            data.setStreet("Example ś ź Street 1");
-                            data.setZipCode("12345");
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-        </div>
-        
+                           <td>Autor: </td>
+                           <td>[[${data.getTransferedBy().getFirstName()}]] [[${data.getTransferedBy().getLastName()}]]  </td>
+                       </tr>
+                       <tr>
+                           <td>Jednostka przekazująca: </td>
+                           <td>[[${data.getTransferigUnit().getName()}]]</td>
+                       </tr>
+                       <tr>
+                           <td>Ulica: </td>
+                           <td>[[${data.getTransferigUnit().getAddress().getStreet()}]] </td>
+                       </tr>
+                       <tr>
+                           <td>Number: </td>
+                           <td>[[${data.getTransferigUnit().getAddress().getApartmentNumber()}]] / [[${data.getStateArchive().getAddress().getBuildingNumber()}]]</td>
+                       </tr>
+                       <tr>
+                           <td>Miasto: </td>
+                           <td>[[${data.getTransferigUnit().getAddress().getCity()}]]</td>
+                       </tr>
+                       <tr>
+                           <td>Kod pocztowy: </td>
+                           <td>[[${data.getTransferigUnit().getAddress().getZipCode()}]]</td>
+                       </tr>
+                   </table>
+               </div>
+               <div class="block">
+                  <h3>Dane wniosku</h3>
+                   <table>
+                       <tr>
+                           <td>Znak sprawy archiwum: </td>
+                           <td>[[${data.getCaseId()}]]</td>
+                       </tr>
+                       <tr>
+                           <td>Data sporządzenia wniosku: </td>
+                           <td>[[${data.getCreateDateTime()}]]</td>
+                       </tr>
+                       <tr>
+                           <td>Data sporządzenia spisu z-o: </td>
+                           <td>[[${data.getHandOverReportDateTime()}]]</td>
+                       </tr>
+                       <tr>
+                           <td>Identyfikator paczki archiwalnej: </td>
+                           <td>[[${data.getPackageIdentifier()}]]</td>
+                       </tr>
+                       <tr>
+                           <td>Nazwa paczki archiwalnej: </td>
+                           <td>[[${data.getPackageFileName()}]]</td>
+                       </tr>
+                   </table>
+                   <div class="block">
+                   <h3>Uzasadnienie odrzucenia paczki</h3>
+                   <p>Autor: <b>[[${data.getVerifiedBy().getFirstName()}]] [[${data.getVerifiedBy().getLastName()}]]</b></p>
+                   <p>[[${data.getComment()}]]</p>
+               </div>
+               <div class="block">
+                   <h3>Informacja o wynikach kroków weryfikacji</h3>
+                   <div th:each="result:${data.verificationResultList}" class="step">
+                       <table>
+                           <p>Typ weryfikacji: [[${result.getTypeString()}]]</p>
+                           <p>Powodzenie: <span th:if="${result.getType()} ? 'Sukes' : 'Niepowodzenie'">Sukces</span></p>
+                       </table>
+                    <div>
+                           <table class="message">
+                            <tr>
+                                <th>Wiadomość</th>
+                            </tr>
+                            <tr>
+                                <td>[[${result.getSuccessMessage()}]]</td>
+                            </tr>
+                        </table>
+                    </div>
+                    
+                    <div>
+                        <table class="errors">
+                            <tr>
+                                <th>Błędy</th>
+                            </tr>
+                            <tr th:each="error:${result.getErrors()}">
+                                <td>[[${error}]]</td>
+                            </tr>
+                        </table>
+                    </div>
+                   </div>
+               </div>
+               </div>
+               
+           </div>
+           
+       </div>
     </body>
 </html>

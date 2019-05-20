@@ -3,7 +3,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <groupId>de.tuhrig</groupId>
-  <artifactId>Flying_Saucer_PDF_Generation</artifactId>
+  <artifactId>ADE-PDF</artifactId>
   <version>0.1.0</version>
   <dependencies>
     <dependency>
