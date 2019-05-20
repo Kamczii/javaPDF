@@ -3,11 +3,13 @@ package pl.primigemius.ade.report;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * Raport z weryfikacji materiałów archiwalnych
  * @author bartoszk
  */
+@XmlRootElement
 public class PackageReportData {
     
     //Archiwum pństwowe
@@ -46,7 +48,9 @@ public class PackageReportData {
     private User verifiedBy;
     
     private String comment;
-
+    
+    public PackageReportData(){}
+    
     public PackageReportData(Archive stateArchive, Archive transferigUnit, User transferedBy, LocalDateTime createDateTime, LocalDateTime handOverReportDateTime, BigDecimal packageSizeMB, String caseId, LocalDateTime verifyDateTime, String packageIdentifier, String packageFileName, List<VerificationResult> verificationResultList, User verifiedBy, String comment) {
         this.stateArchive = stateArchive;
         this.transferigUnit = transferigUnit;

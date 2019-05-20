@@ -99,10 +99,8 @@
                <div class="block">
                    <h3>Informacja o wynikach kroków weryfikacji</h3>
                    <div th:each="result:${data.verificationResultList}" class="step">
-                       <table>
                            <p>Typ weryfikacji: [[${result.getTypeString()}]]</p>
                            <p>Powodzenie: <span th:if="${result.getType()} ? 'Sukes' : 'Niepowodzenie'">Sukces</span></p>
-                       </table>
                     <div>
                            <table class="message">
                             <tr>

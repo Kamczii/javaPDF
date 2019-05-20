@@ -9,16 +9,23 @@ import static com.itextpdf.text.pdf.BaseFont.EMBEDDED;
 import static com.itextpdf.text.pdf.BaseFont.IDENTITY_H;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.nio.file.FileSystems;
+import java.time.Clock;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 import static org.thymeleaf.templatemode.TemplateMode.HTML;
@@ -42,21 +49,23 @@ public class PackageReport {
     private static final String OUTPUT_FILE = "test.pdf";
     private static final String UTF_8 = "UTF-8";
 
-    public static void main(String[] args) throws UnsupportedEncodingException, DocumentException, IOException  {
+    public static void main(String[] args) throws UnsupportedEncodingException, DocumentException, IOException, JAXBException  {
         PackageReportData data = exampleDataForPackageReport();
+        generateXML(data);
         generatePDF(data);
-        
     }
     
-    public static void generateReport(PackageReportData data, FileTypeEnum type) throws DocumentException, IOException{
+    public static void generateReport(PackageReportData data, FileTypeEnum type) throws DocumentException, IOException, JAXBException{
         switch(type){
             case XML:
+                generateXML(data);
                 break;
             case PDF:
                 generatePDF(data);
                 break;
         }
     }
+    
     private static PackageReportData exampleDataForPackageReport() {
         Archive archive1 = new Archive();
         archive1.setName("Pañstwowe archiwum w Warszawie");
@@ -121,7 +130,7 @@ public class PackageReport {
         return outputStream.toString(UTF_8);
     }
     
-    private static void generatePDF(PackageReportData raport) throws UnsupportedEncodingException, DocumentException, IOException{
+    private static byte[] generatePDF(PackageReportData raport) throws UnsupportedEncodingException, DocumentException, IOException{
         
         ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
         templateResolver.setPrefix("/");
@@ -148,12 +157,40 @@ public class PackageReport {
                                 .toString();
         renderer.setDocumentFromString(xHtml, baseUrl);
         renderer.layout();
-        OutputStream outputStream = new FileOutputStream(OUTPUT_FILE);
-        renderer.createPDF(outputStream);
-        outputStream.close();
+        //OutputStream outputStream = new FileOutputStream(OUTPUT_FILE);
+        //renderer.createPDF(outputStream);
+        //outputStream.close();
+        
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        renderer.createPDF(stream);
+        stream.close();
+        return stream.toByteArray();
     }
     
-    private static void generateXML(PackageReportData raport){
+    private static byte[] generateXML(PackageReportData raport) throws JAXBException{
+        String xmlString = "";
+        try {
+            JAXBContext context = JAXBContext.newInstance(PackageReportData.class);
+            Marshaller m = context.createMarshaller();
+
+            m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE); // To format XML
+
+            StringWriter sw = new StringWriter();
+            m.marshal(raport, sw);
+            xmlString = sw.toString();
+
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        }
         
+        
+        try {
+         byte[] b;
+         b = xmlString.getBytes("UTF-8");
+         return b;
+        } catch (UnsupportedEncodingException e) {
+         e.printStackTrace();
+        }
+        return null;   
     }
 }
